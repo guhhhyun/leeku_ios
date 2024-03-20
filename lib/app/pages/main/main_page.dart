@@ -103,7 +103,7 @@ class MainPage extends StatelessWidget {
             case 0:
               return HomePage();
            /* case 1:
-              return BluetoothPage();
+              return testPage();
             case 2:
               return SettingPage();*/
             default:

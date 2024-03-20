@@ -66,7 +66,8 @@ class InventoryCountingPage extends StatelessWidget {
                   const SizedBox(height: 20,),
                   _checkButton(),
                   const SizedBox(height: 20,),
-                  _barcodeField(context)
+                  _barcodeField(context),
+
                 ],
               ),
               const SizedBox(height: 20,),

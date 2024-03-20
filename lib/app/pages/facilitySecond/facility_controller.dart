@@ -26,7 +26,8 @@ class FacilityController extends GetxController {
   Rx<DateTime> selectedStartDay = DateTime.now().obs; // 선택된 날짜
   Rx<DateTime> selectedEndDay = DateTime.now().obs; // 선택된 날짜
   RxString dayValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
-  RxString step1DayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 10))).obs;
+  // RxString step1DayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 10))).obs;
+  RxString step1DayStartValue = '${DateTime.now().year.toString()}-01-01'.obs;
   RxString step1DayEndValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
   RxString dayStartValue = DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()).obs;
   RxString dayEndValue = DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()).obs;
@@ -48,7 +49,7 @@ class FacilityController extends GetxController {
   RxList<String> irfgList = [''].obs;
   RxList<dynamic> irfgList2 = [].obs;
   RxList<dynamic> step1IrfgList = [].obs;
-  RxMap<String, String> selectedIrFqMap2 = {'CODE':'010', 'TEXT': '돌발정비'}.obs;
+  RxMap<String, String> selectedIrFqMap2 = {'CODE':'', 'TEXT': '전체'}.obs;
   RxString selectedIrFq = '선택해주세요'.obs;
   RxString irfqCd = ''.obs;
   RxList<String> resultFgList = ['전체','정비 진행중', '정비완료', '미조치'].obs;
@@ -84,7 +85,7 @@ class FacilityController extends GetxController {
   RxList<int> partQtyList = [1].obs;
   RxList<int> partSelectedQtyList = [1].obs;
   RxList<dynamic> otherPartList = [].obs;
- // RxMap<String, String> otherPartMap = {'ITEM_SPEC':'', 'ITEM_NAME': '', 'QTY': ''}.obs;
+  // RxMap<String, String> otherPartMap = {'ITEM_SPEC':'', 'ITEM_NAME': '', 'QTY': ''}.obs;
   RxList<dynamic> machList = [].obs;
   RxString selectedMach = '선택해주세요'.obs;
   RxInt selectedMachIndex = 0.obs;
@@ -107,7 +108,7 @@ class FacilityController extends GetxController {
       '@p_RESULT_FG':'${resultFgCd.value}', '@p_NO_REASON':'${noReasonCd.value}',
       '@p_RP_DEPT': null, '@p_USER':Utils.getStorage.read('userId')});
     Get.log('이거 ${a['DATAS']}');
-  //  var b = a['DATAS'][0].toString().replaceFirst('{: ', '').replaceFirst('}', '');
+    //  var b = a['DATAS'][0].toString().replaceFirst('{: ', '').replaceFirst('}', '');
 
     Get.log('저장 결과값::::: ${a['DATAS']}');
 
@@ -124,7 +125,7 @@ class FacilityController extends GetxController {
           , '@p_ITEM_NAME':'${otherPartList[i]['ITEM_NAME']}', '@p_ITEM_SPEC':'${otherPartList[i]['ITEM_SPEC']}', '@p_USE_QTY':'${otherPartList[i]['QTY']}',});
       }
     }
-   /* await HomeApi.to.PROC('USP_MBS0300_S01', {'@p_WORK_TYPE':'PART_N', '@p_RP_CODE':'', '@p_ITEM_CODE':''
+    /* await HomeApi.to.PROC('USP_MBS0300_S01', {'@p_WORK_TYPE':'PART_N', '@p_RP_CODE':'', '@p_ITEM_CODE':''
       , '@p_ITEM_NAME':'', '@p_ITEM_SPEC':'', '@p_USE_QTY':'',});*/
 
   }
@@ -161,8 +162,8 @@ class FacilityController extends GetxController {
 
         },
         Get.log('part111:  ${partList.value}'),
-      Get.log('dept111:  ${selectedContainer[0]['INS_DEPT']}'),
-      Get.log('mach111:  ${selectedContainer[0]['MACH_CODE']}'),
+        Get.log('dept111:  ${selectedContainer[0]['INS_DEPT']}'),
+        Get.log('mach111:  ${selectedContainer[0]['MACH_CODE']}'),
 
       });
     }catch(err) {
@@ -181,9 +182,9 @@ class FacilityController extends GetxController {
     var list = await HomeApi.to.PROC22('USP_MBS0300_R01', {'@p_WORK_TYPE':'Q', '@p_RP_CODE': selectedContainer[0]['RP_CODE']}).then((value) =>
     {
 
-        alreadyList.value = value['RESULT']['DATAS'][0]['DATAS'],
-        alreadyPartList.value = value['RESULT']['DATAS'][1]['DATAS'],
-        Get.log('자자자3 ${value['RESULT']['DATAS'][1]['NAMES']}'),
+      alreadyList.value = value['RESULT']['DATAS'][0]['DATAS'],
+      alreadyPartList.value = value['RESULT']['DATAS'][1]['DATAS'],
+      Get.log('자자자3 ${value['RESULT']['DATAS'][1]['NAMES']}'),
       if(alreadyList.isEmpty) {
         isAlreadyListData.value = false
       }else {

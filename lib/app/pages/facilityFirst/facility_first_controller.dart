@@ -49,7 +49,7 @@ class FacilityFirstController extends GetxController {
   RxList<dynamic> step1IrfgList = [].obs;
   RxList<dynamic> irfgList = [].obs;
   RxMap<String, String> selectedIrFqMap = {'CODE':'010', 'TEXT': '돌발정비'}.obs;
-  RxMap<String, String> checkSelectedIrFqMap = {'CODE':'010', 'TEXT': '돌발정비'}.obs;
+  RxMap<String, String> checkSelectedIrFqMap = {'CODE':'', 'TEXT': '전체'}.obs;
   RxString selectedIrFq = '선택해주세요'.obs;
   RxString selectedReadIrFq = '선택해주세요'.obs;
   RxList<dynamic> engineTeamList = [].obs;
@@ -75,7 +75,8 @@ class FacilityFirstController extends GetxController {
 
 
   RxString dayValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
-  RxString dayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 10))).obs;
+  // RxString dayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 10))).obs;
+  RxString dayStartValue = '${DateTime.now().year.toString()}-01-01'.obs;
   RxString dayEndValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
   RxInt choiceButtonVal = 1.obs;
   RxBool isShowCalendar = false.obs;
@@ -155,7 +156,7 @@ class FacilityFirstController extends GetxController {
       '@p_FAILURE_DT':errorTime.value, '@p_IR_FG':selectedIrFqMap['CODE'], '@p_URGENCY_FG':urgencyCd.value,
       '@p_INS_DEPT':selectedEngineTeamMap['CODE'], '@p_USER':Utils.getStorage.read('userId')});
     Get.log('신규등록 :::::::: ${a['DATAS'][0]['IR_CODE']}');
-     irFileCode.value = a['DATAS'][0]['IR_CODE'];
+    irFileCode.value = a['DATAS'][0]['IR_CODE'];
 
     /// 사진파일 프로시저 추가해야함
 
@@ -217,7 +218,7 @@ class FacilityFirstController extends GetxController {
         modifySelectedIrFqMap['CODE'] = e['CODE'];
         modifySelectedIrFqMap['TEXT'] = e['TEXT'];
       }
-        Get.log('modifySelectedIrFqMap::: $modifySelectedIrFqMap 선택!!!!');
+      Get.log('modifySelectedIrFqMap::: $modifySelectedIrFqMap 선택!!!!');
     }).toList();
 
     modifyEngineTeamList.map((e) {

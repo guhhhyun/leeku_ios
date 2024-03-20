@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 class HomeApi {
   static HomeApi get to => Get.find();
 
+  /// 개발
   Future<String?> EXEC(
       String MODE,
       String CODE,
@@ -59,53 +60,6 @@ class HomeApi {
     }
   }
 
-  Future<String?> EXEC22(
-      String MODE,
-      String CODE,
-      Map? PARAMS, {
-        String? url = null,
-        String? service_name = null,
-        String? auth = null,
-        int timeoutSec = 10,
-        String ContentType = 'application/json',
-        Map<String, dynamic>? OPTION = null,
-      }) async {
-    Map<String, dynamic> data = {};
-    String result = "";
-    Object? exception = null;
-    try {
-      if (url == null) url = 'mes1.leeku.co.kr:7000';
-      if (service_name == null) service_name = 'WebAPI/';
-
-      var RequestUri = Uri.http(url, service_name);
-      var params;
-      if (PARAMS != null) params = json.encode(PARAMS);
-      Map<String, dynamic> data = {
-        'SERVICE':'LEEKU_IF',
-        'MODE': MODE,
-        'CODE': CODE,
-        'PARAM': params,
-        'AUTH' : auth,
-      };
-      if(OPTION != null){
-        data.addAll(OPTION!);
-      }
-      var response = await http.post(
-          RequestUri,
-          headers: {'Content-Type': ContentType},
-          body: json.encode(data)
-      ).timeout(Duration(seconds: timeoutSec));
-      result = utf8.decode(response.bodyBytes);
-      return result;
-    }catch(ex){
-      exception = ex;
-      Utils.gErrorMessage('네트워크 오류');
-    }finally{
-      log({'url':url,'service_name':service_name,'MODE':MODE,'CODE':CODE,'PARAMS':PARAMS}.toString());
-      log({'DATA':data, 'RESULT':result, 'EXCEPTION':exception}.toString());
-    }
-  }
-
 
   Future<Map> PROC(String procName, Map? PARAMS) async {
     String res = await EXEC2("PROC", procName, PARAMS) ?? "";
@@ -113,7 +67,7 @@ class HomeApi {
     return data;
   }
 
-  Future<Map> PROC23(String procName, Map? PARAMS) async {
+  Future<Map> gaebal_PROC(String procName, Map? PARAMS) async {
     String res = await EXEC("PROC", procName, PARAMS) ?? "";
     Map data = json.decode(res);
     return data;
@@ -127,7 +81,7 @@ class HomeApi {
   }
 
 
-
+  /// 운영
   Future<String?> EXEC2(
   String MODE,
   String CODE,
