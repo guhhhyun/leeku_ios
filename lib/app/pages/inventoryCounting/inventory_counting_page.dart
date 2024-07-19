@@ -53,26 +53,26 @@ class InventoryCountingPage extends StatelessWidget {
 
   Widget _topArea(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Obx(() => Container(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 4),
-          child: Column(
-            children: [
-            //  _scrapDropdown(),
-              Column(
-                children: [
-                  const SizedBox(height: 20,),
-                  _calendarItem(),
-                  controller.isShowCalendar.value == true ? _calendar() : Container(),
-                  const SizedBox(height: 20,),
-                  _checkButton(),
-                  const SizedBox(height: 20,),
-                  _barcodeField(context)
-                ],
-              ),
-              const SizedBox(height: 20,),
-            ],
-          )
-      ), )
+        child: Obx(() => Container(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 4),
+            child: Column(
+              children: [
+                //  _scrapDropdown(),
+                Column(
+                  children: [
+                    const SizedBox(height: 20,),
+                    _calendarItem(),
+                    controller.isShowCalendar.value == true ? _calendar() : Container(),
+                    const SizedBox(height: 20,),
+                    _checkButton(),
+                    const SizedBox(height: 20,),
+                    _barcodeField(context)
+                  ],
+                ),
+                const SizedBox(height: 20,),
+              ],
+            )
+        ), )
     );
   }
 
@@ -199,53 +199,53 @@ class InventoryCountingPage extends StatelessWidget {
   Widget _mach() {
     return Expanded(
       child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-                color: AppTheme.ae2e2e2
-            )),
-        padding: const EdgeInsets.only(left: 12, right: 12),
-        child:  controller.selectedCheckLocationMap['DETAIL_NM'] == '재공' ? DropdownButton(
-            borderRadius: BorderRadius.circular(10),
-            isExpanded: true,
-            underline: Container(
-              height: 1,
-              color: Colors.white,
-            ),
-            icon: SvgPicture.asset(
-              'assets/app/arrowBottom.svg',
-              color: AppTheme.light_placeholder,
-            ),
-            dropdownColor: AppTheme.light_ui_01,
-            value: controller.selectedMachMap['CMH_NM'],
-            //  flag == 3 ? controller.selectedNoReason.value :
-            items: controller.machList.map((value) {
-              return DropdownMenuItem<String>(
-                value: value['CMH_NM'],
-                child: Text(
-                  value['CMH_NM'],
-                  style: AppTheme.a16500
-                      .copyWith(color: value['CMH_NM'] == '설비 선택' ? AppTheme.light_placeholder : AppTheme.a6c6c6c),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              controller.machList.map((e) {
-                if(e['CMH_NM'] == value) {
-                  controller.selectedMachMap['CMH_ID'] = e['CMH_ID'].toString();
-                  controller.selectedMachMap['CMH_NM'] = e['CMH_NM'];
-                }
-                //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
-              }).toList();
-
-              Get.log('$value 선택!!!!');
-              // Get.log('${HomeApi.to.BIZ_DATA('L_USER_001')}');
-            }) : Container(
+          height: 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10)
-          ),
-        )
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                  color: AppTheme.ae2e2e2
+              )),
+          padding: const EdgeInsets.only(left: 12, right: 12),
+          child:  controller.selectedCheckLocationMap['DETAIL_NM'] == '재공' ? DropdownButton(
+              borderRadius: BorderRadius.circular(10),
+              isExpanded: true,
+              underline: Container(
+                height: 1,
+                color: Colors.white,
+              ),
+              icon: SvgPicture.asset(
+                'assets/app/arrowBottom.svg',
+                color: AppTheme.light_placeholder,
+              ),
+              dropdownColor: AppTheme.light_ui_01,
+              value: controller.selectedMachMap['CMH_NM'],
+              //  flag == 3 ? controller.selectedNoReason.value :
+              items: controller.machList.map((value) {
+                return DropdownMenuItem<String>(
+                  value: value['CMH_NM'],
+                  child: Text(
+                    value['CMH_NM'],
+                    style: AppTheme.a16500
+                        .copyWith(color: value['CMH_NM'] == '설비 선택' ? AppTheme.light_placeholder : AppTheme.a6c6c6c),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                controller.machList.map((e) {
+                  if(e['CMH_NM'] == value) {
+                    controller.selectedMachMap['CMH_ID'] = e['CMH_ID'].toString();
+                    controller.selectedMachMap['CMH_NM'] = e['CMH_NM'];
+                  }
+                  //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
+                }).toList();
+
+                Get.log('$value 선택!!!!');
+                // Get.log('${HomeApi.to.BIZ_DATA('L_USER_001')}');
+              }) : Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10)
+            ),
+          )
       ),
     );
   }
@@ -271,7 +271,7 @@ class InventoryCountingPage extends StatelessWidget {
               for(var i = 0; i < controller.productList.length; i++) {
                 controller.controllers.add(TextEditingController(text: '${controller.productList[i]['C04']}'))
               },
-            //  controller.productList.value = controller.productList.reversed.toList()
+              //  controller.productList.value = controller.productList.reversed.toList()
             }
           }); /// 구분도 여쭤봐야함
           Get.log('조회 결과~~~~~ $a');
@@ -302,7 +302,7 @@ class InventoryCountingPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)
                 ),
                 child: TextFormField(
-                    focusNode: focusNode2,
+                  focusNode: focusNode2,
                   style:  AppTheme.a16400.copyWith(color: AppTheme.a6c6c6c),
                   controller: controller.textController,
                   textAlignVertical: TextAlignVertical.center,
@@ -364,7 +364,7 @@ class InventoryCountingPage extends StatelessWidget {
                             //  FocusScope.of(context).requestFocus(focusNode);
                             Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
                           });
-                         /* SchedulerBinding.instance!.addPostFrameCallback((_) {
+                          /* SchedulerBinding.instance!.addPostFrameCallback((_) {
                             Get.dialog(CommonDialogWidget(contentText: '저장되었습니다', flag: 1, pageFlag: 4,));
                           });*/
                         },
@@ -392,31 +392,31 @@ class InventoryCountingPage extends StatelessWidget {
                   '#ff6666', '취소', false, ScanMode.BARCODE);
               controller.textController.text = barcodeScanRes;
               if(controller.textController.text != '-1') {
-                  await controller.saveButton();
-                  controller.textController.text = '';
-                  FocusScope.of(context).autofocus(focusNode);
-                  controller.controllers.clear();
-                  controller.productList.clear();
+                await controller.saveButton();
+                controller.textController.text = '';
+                FocusScope.of(context).autofocus(focusNode);
+                controller.controllers.clear();
+                controller.productList.clear();
 
-                  var a = await HomeApi.to.PROC('USP_MBS0500_R01', {'@p_WORK_TYPE':'Q', '@p_DATE': controller.selectedCheckLocationMap['DETAIL_CD'] == '2' ? controller.dateValue2.value :
-                  controller.selectedCheckLocationMap['DETAIL_CD'] == '3' ? controller.dateValue3.value : controller.selectedCheckLocationMap['DETAIL_CD'] == '4' ? controller.dateValue4.value : controller.dateValue5.value
-                    ,'@p_STK_GB':'${controller.selectedCheckLocationMap['DETAIL_CD']}', '@p_CMH_ID': controller.selectedCheckLocationMap['DETAIL_CD'] == '4' ? controller.selectedMachMap['CMH_ID'] : ''}).then((value) =>
-                  {
-                    if(value['RESULT']['DATAS'][0]['DATAS'] != null) {
-                      controller.productList.value = value['RESULT']['DATAS'][0]['DATAS'],
-                      for(var i = 0; i < controller.productList.length; i++) {
-                        controller.controllers.add(TextEditingController(text: '${controller.productList[i]['C04']}'))
-                      },
-                      //  controller.productList.value = controller.productList.reversed.toList()
-                    }
-                  });
-                  Future.delayed(const Duration(), (){
-                    focusNode2.requestFocus();
-                    //  FocusScope.of(context).requestFocus(focusNode);
-                    Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
-                  });
+                var a = await HomeApi.to.PROC('USP_MBS0500_R01', {'@p_WORK_TYPE':'Q', '@p_DATE': controller.selectedCheckLocationMap['DETAIL_CD'] == '2' ? controller.dateValue2.value :
+                controller.selectedCheckLocationMap['DETAIL_CD'] == '3' ? controller.dateValue3.value : controller.selectedCheckLocationMap['DETAIL_CD'] == '4' ? controller.dateValue4.value : controller.dateValue5.value
+                  ,'@p_STK_GB':'${controller.selectedCheckLocationMap['DETAIL_CD']}', '@p_CMH_ID': controller.selectedCheckLocationMap['DETAIL_CD'] == '4' ? controller.selectedMachMap['CMH_ID'] : ''}).then((value) =>
+                {
+                  if(value['RESULT']['DATAS'][0]['DATAS'] != null) {
+                    controller.productList.value = value['RESULT']['DATAS'][0]['DATAS'],
+                    for(var i = 0; i < controller.productList.length; i++) {
+                      controller.controllers.add(TextEditingController(text: '${controller.productList[i]['C04']}'))
+                    },
+                    //  controller.productList.value = controller.productList.reversed.toList()
+                  }
+                });
+                Future.delayed(const Duration(), (){
+                  focusNode2.requestFocus();
+                  //  FocusScope.of(context).requestFocus(focusNode);
+                  Future.delayed(const Duration(), () => SystemChannels.textInput.invokeMethod('TextInput.hide'));
+                });
               }else {
-               controller.textController.text = '';
+                controller.textController.text = '';
               }
             },
             child: const Icon(Icons.camera_alt_outlined, size: 30, color: AppTheme.black)
@@ -431,7 +431,7 @@ class InventoryCountingPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: _topAreaTest(context)
+            child: _topAreaTest(context)
         ),
         const SizedBox(height: 10,),
       ],
@@ -441,56 +441,56 @@ class InventoryCountingPage extends StatelessWidget {
 
   Widget _scrapDropdown(bool isCheck) {
     return Expanded(
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppTheme.ae2e2e2),
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppTheme.white
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: AppTheme.ae2e2e2),
+            borderRadius: BorderRadius.circular(10),
+            color: AppTheme.white
+        ),
+        padding: const EdgeInsets.only(left: 12, right: 12),
+        child: DropdownButton(
+            borderRadius: BorderRadius.circular(3),
+            isExpanded: true,
+            underline: Container(
+              height: 1,
+              color: Colors.white,
+            ),
+            icon: SvgPicture.asset(
+              'assets/app/arrowBottom.svg',
+              color: AppTheme.light_placeholder,
+            ),
+            dropdownColor: AppTheme.light_ui_01,
+            value: isCheck ? controller.selectedCheckLocationMap['DETAIL_NM'] : controller.selectedSaveLocationMap['DETAIL_NM'],
+            //  flag == 3 ? controller.selectedNoReason.value :
+            items: controller.locationList.map((value) {
+              return DropdownMenuItem<String>(
+                value: value['DETAIL_NM'],
+                child: Text(
+                  value['DETAIL_NM'],
+                  style: AppTheme.a16400
+                      .copyWith(color: AppTheme.a6c6c6c),
                 ),
-                padding: const EdgeInsets.only(left: 12, right: 12),
-                child: DropdownButton(
-                    borderRadius: BorderRadius.circular(3),
-                    isExpanded: true,
-                    underline: Container(
-                      height: 1,
-                      color: Colors.white,
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/app/arrowBottom.svg',
-                      color: AppTheme.light_placeholder,
-                    ),
-                    dropdownColor: AppTheme.light_ui_01,
-                    value: isCheck ? controller.selectedCheckLocationMap['DETAIL_NM'] : controller.selectedSaveLocationMap['DETAIL_NM'],
-                    //  flag == 3 ? controller.selectedNoReason.value :
-                    items: controller.locationList.map((value) {
-                      return DropdownMenuItem<String>(
-                        value: value['DETAIL_NM'],
-                        child: Text(
-                          value['DETAIL_NM'],
-                          style: AppTheme.a16400
-                              .copyWith(color: AppTheme.a6c6c6c),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      controller.locationList.map((e) {
-                        if(e['DETAIL_NM'] == value) {
-                          if(isCheck) {
-                            controller.selectedCheckLocationMap['DETAIL_CD'] = e['DETAIL_CD'];
-                            controller.selectedCheckLocationMap['DETAIL_NM'] = e['DETAIL_NM'];
-                          }else {
-                            controller.selectedSaveLocationMap['DETAIL_CD'] = e['DETAIL_CD'];
-                            controller.selectedSaveLocationMap['DETAIL_NM'] = e['DETAIL_NM'];
-                          }
-                        }
+              );
+            }).toList(),
+            onChanged: (value) {
+              controller.locationList.map((e) {
+                if(e['DETAIL_NM'] == value) {
+                  if(isCheck) {
+                    controller.selectedCheckLocationMap['DETAIL_CD'] = e['DETAIL_CD'];
+                    controller.selectedCheckLocationMap['DETAIL_NM'] = e['DETAIL_NM'];
+                  }else {
+                    controller.selectedSaveLocationMap['DETAIL_CD'] = e['DETAIL_CD'];
+                    controller.selectedSaveLocationMap['DETAIL_NM'] = e['DETAIL_NM'];
+                  }
+                }
 
-                        //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
-                      }).toList();
-                      isCheck ? Get.log('${ controller.selectedCheckLocationMap} 선택!!!!') : Get.log('${ controller.selectedSaveLocationMap} 선택!!!!');
-                    }),
-              ),
-            );
+                //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
+              }).toList();
+              isCheck ? Get.log('${ controller.selectedCheckLocationMap} 선택!!!!') : Get.log('${ controller.selectedSaveLocationMap} 선택!!!!');
+            }),
+      ),
+    );
   }
 
   Widget _listArea() {
@@ -503,101 +503,101 @@ class InventoryCountingPage extends StatelessWidget {
   Widget _listItem({required BuildContext context, required int index}) {
 
     return Obx(() => Container(
-              margin: const EdgeInsets.only(left: 18, bottom: 10, right: 18),
-              padding: const EdgeInsets.only(top:10, bottom: 10, left: 10, right: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppTheme.aE2E2E2),
-                  color: AppTheme.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppTheme.gray_c_gray_100.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ]
-              ),
-              child: Column(
+      margin: const EdgeInsets.only(left: 18, bottom: 10, right: 18),
+      padding: const EdgeInsets.only(top:10, bottom: 10, left: 10, right: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppTheme.aE2E2E2),
+          color: AppTheme.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.gray_c_gray_100.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ]
+      ),
+      child: Column(
+        children: [
+          controller.productList.isNotEmpty ?
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 children: [
-                  controller.productList.isNotEmpty ?
+                  Text(controller.productList[index]['NO'].toString() ?? '',
+                      style: AppTheme.a16700
+                          .copyWith(color: AppTheme.black)),
+                  const SizedBox(width: 12,),
+                  Text(controller.productList[index]['C01'] ?? '',
+                      style: AppTheme.a16700
+                          .copyWith(color: AppTheme.black)),
+                  const SizedBox(width: 12,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text(controller.productList[index]['NO'].toString() ?? '',
-                              style: AppTheme.a16700
-                                  .copyWith(color: AppTheme.black)),
-                          const SizedBox(width: 12,),
-                          Text(controller.productList[index]['C01'] ?? '',
-                              style: AppTheme.a16700
-                                  .copyWith(color: AppTheme.black)),
-                          const SizedBox(width: 12,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(controller.productList[index]['C02'].toString() ?? '',
-                                  style: AppTheme.a16400
-                                      .copyWith(color: AppTheme.black)),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const SizedBox(width: 12,),
-                          Row(
-                            children: [
-                              Text(controller.productList[index]['CD03'] == null ? '' : controller.productList[index]['CD03'].toString(),
-                                  style: AppTheme.a16400
-                                      .copyWith(color: AppTheme.black)),
-                            ],
-                          ),
-                          const SizedBox(width: 12,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text('중량: ',
-                                  style: AppTheme.a16400
-                                      .copyWith(color: AppTheme.black)),
-                       /*             Text(controller.productList[index]['C04'] == null ? '' : controller.productList[index]['C04'].toString(),
-                                  style: AppTheme.a16400
-                                      .copyWith(color: AppTheme.black)),*/
-                              controller.controllers.isNotEmpty ?
-                              SizedBox(
-                                width: 50,
-                                child: TextFormField(
-                                  style:  AppTheme.a16700.copyWith(color: AppTheme.black),
-                                  // maxLines: 5,
-                                  controller: controller.controllers[index],
-                                  textInputAction: TextInputAction.done,
-                                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    contentPadding: const EdgeInsets.all(0),
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    counterText:'',
-                                    hintText: '',
-                                    hintStyle: AppTheme.a16400.copyWith(color: AppTheme.black),
-                                    border: InputBorder.none,
-                                  ),
-                                  showCursor: true,
-
-                                  // onChanged: ((value) => controller.submitSearch(value)),
-                                ),
-                              ) : Container(),
-                            ],
-                          ),
-                        ],
-                      )
+                      Text(controller.productList[index]['C02'].toString() ?? '',
+                          style: AppTheme.a16400
+                              .copyWith(color: AppTheme.black)),
                     ],
-                  )
-                      : Container(),
+                  ),
                 ],
               ),
-            ),
+              Row(
+                children: [
+                  const SizedBox(width: 12,),
+                  Row(
+                    children: [
+                      Text(controller.productList[index]['CD03'] == null ? '' : controller.productList[index]['CD03'].toString(),
+                          style: AppTheme.a16400
+                              .copyWith(color: AppTheme.black)),
+                    ],
+                  ),
+                  const SizedBox(width: 12,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('중량: ',
+                          style: AppTheme.a16400
+                              .copyWith(color: AppTheme.black)),
+                      /*             Text(controller.productList[index]['C04'] == null ? '' : controller.productList[index]['C04'].toString(),
+                                  style: AppTheme.a16400
+                                      .copyWith(color: AppTheme.black)),*/
+                      controller.controllers.isNotEmpty ?
+                      SizedBox(
+                        width: 50,
+                        child: TextFormField(
+                          style:  AppTheme.a16700.copyWith(color: AppTheme.black),
+                          // maxLines: 5,
+                          controller: controller.controllers[index],
+                          textInputAction: TextInputAction.done,
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: const EdgeInsets.all(0),
+                            fillColor: Colors.white,
+                            filled: true,
+                            counterText:'',
+                            hintText: '',
+                            hintStyle: AppTheme.a16400.copyWith(color: AppTheme.black),
+                            border: InputBorder.none,
+                          ),
+                          showCursor: true,
+
+                          // onChanged: ((value) => controller.submitSearch(value)),
+                        ),
+                      ) : Container(),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          )
+              : Container(),
+        ],
+      ),
+    ),
     );
   }
 

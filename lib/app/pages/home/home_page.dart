@@ -42,12 +42,18 @@ class _HomePageState extends State<HomePage> {
         child: gs.loginId.value != '' ? CustomScrollView(
           slivers: [
             //MainHeader(),
-            MainSlideWidget(),
+            // MainSlideWidget(),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            HomeNewsWidget(2),
             MainIconWidget(),
             const SliverToBoxAdapter(
               child: SizedBox(height: 24),
             ),
-            HomeNewsWidget(),
+            HomeNewsWidget(1),
             const SliverToBoxAdapter(
               child: SizedBox(height: AppTheme.spacing_xxxl_40),
             ),

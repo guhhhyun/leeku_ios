@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 
 
 class HomeNewsWidget extends StatelessWidget {
+  late int gubun; // 공지사항, 알림 구분값
+  HomeNewsWidget(this.gubun);
   HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,8 @@ class HomeNewsWidget extends StatelessWidget {
         color: AppTheme.white,
         child: Column(
           children: [
-            _alarmItem('알림사항'),
+            gubun == 1 ?
+            _alarmItem('알림사항') :
             _newItem('공지사항'),
           ],
         ),
@@ -130,10 +133,10 @@ class HomeNewsWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                ) : Container(), 
+                ) : Container(),
                 const SizedBox(height: 8,),
                 controller.alarmNList.length > 2 ?
-                 InkWell(
+                InkWell(
                   onDoubleTap: () async{
                     var a = await HomeApi.to.PROC("PS_PERIOD_USR_MSG", {"@p_WORK_TYPE":"U_CHK","@p_RCV_USER":Utils.getStorage.read('userId'),"@p_ID":controller.alarmNList[2]["ID"]});
                     controller.reqListAlarm();
@@ -177,11 +180,11 @@ class HomeNewsWidget extends StatelessWidget {
         )
     ));
   }
-  
+
   Widget _newItem(String title) {
     return Obx(() => Container(
 
-        margin: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        margin: EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 24),
         padding: EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 24),
         decoration: BoxDecoration(
             boxShadow: [
@@ -203,9 +206,9 @@ class HomeNewsWidget extends StatelessWidget {
               children: [
                 Text(title, style: AppTheme.a16700.copyWith(color: AppTheme.black)),
                 IconButton(onPressed: () {
-                    Get.log('$title 더보기 클릭');
-                    Get.toNamed(Routes.NOTICE);
-              }, icon: Icon(Icons.add, size: 18, color: AppTheme.black,))
+                  Get.log('$title 더보기 클릭');
+                  Get.toNamed(Routes.NOTICE);
+                }, icon: Icon(Icons.add, size: 18, color: AppTheme.black,))
               ],
             ),
             const SizedBox(height: 16,),
@@ -222,8 +225,8 @@ class HomeNewsWidget extends StatelessWidget {
                       SizedBox(width: 12,),
                       Expanded(
                         child: Container(
-                          child: Text('${controller.noticeList[0]['TITLE']}', style: AppTheme.a14400.copyWith(color: AppTheme.a6c6c6c),
-                            overflow: TextOverflow.ellipsis,), alignment: Alignment.centerRight
+                            child: Text('${controller.noticeList[0]['TITLE']}', style: AppTheme.a14400.copyWith(color: AppTheme.a6c6c6c),
+                              overflow: TextOverflow.ellipsis,), alignment: Alignment.centerRight
                         ),
                       ),
                     ],
@@ -255,15 +258,15 @@ class HomeNewsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('${controller.noticeList[2]['GUBUN']}', style: AppTheme.a14400.copyWith(color: AppTheme.a6c6c6c)),
-               Container(
-                 width: 152,
-                 child: Row(
-                   children: [
-                     SizedBox(width: 12,),
-                     Expanded(child: Container( child: Text('${controller.noticeList[2]['TITLE']}', style: AppTheme.a14400.copyWith(color: AppTheme.a6c6c6c), overflow: TextOverflow.ellipsis), alignment: Alignment.centerRight,)),
-                   ],
-                 ),
-               ),
+                Container(
+                  width: 152,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 12,),
+                      Expanded(child: Container( child: Text('${controller.noticeList[2]['TITLE']}', style: AppTheme.a14400.copyWith(color: AppTheme.a6c6c6c), overflow: TextOverflow.ellipsis), alignment: Alignment.centerRight,)),
+                    ],
+                  ),
+                ),
               ],
             ) : Container()
             /// ---------------------------------------------------
