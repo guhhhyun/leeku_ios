@@ -52,28 +52,28 @@ class FacilityPage extends StatelessWidget {
 
   Widget _bodyArea(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Container(
-          color: AppTheme.white,
-          padding: EdgeInsets.only(left: 18, right: 18, top: 4),
-          child: Column(
-            children: [
-              Obx(() => _calendar2(context),),
-              SizedBox(height: 12,),
-              _urgenTeamItem(),
-              SizedBox(height: 12,),
-              Row(
-                children: [
-                  _dropDownItem(),
-                  SizedBox(width: 16,),
-                  _irFqDropDownItem()
-                ],
-              ),
-             // _choiceButtonItem(),
-              SizedBox(height: 24,),
-              SizedBox(height: 12,),
-            ],
-          ),
+      child: Container(
+        color: AppTheme.white,
+        padding: EdgeInsets.only(left: 18, right: 18, top: 4),
+        child: Column(
+          children: [
+            Obx(() => _calendar2(context),),
+            SizedBox(height: 12,),
+            _urgenTeamItem(),
+            SizedBox(height: 12,),
+            Row(
+              children: [
+                _dropDownItem(),
+                SizedBox(width: 16,),
+                _irFqDropDownItem()
+              ],
+            ),
+            // _choiceButtonItem(),
+            SizedBox(height: 24,),
+            SizedBox(height: 12,),
+          ],
         ),
+      ),
     );
   }
 
@@ -251,9 +251,9 @@ class FacilityPage extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.only(left: 16, right: 12, top: 14, bottom: 14),
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppTheme.ae2e2e2)
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppTheme.ae2e2e2)
         ),
         child: Row(
           children: [
@@ -511,7 +511,7 @@ class FacilityPage extends StatelessWidget {
                 controller.readCdConvert();
                 controller.datasList.clear();
                 controller.selectedDatas.clear();
-    HomeApi.to.PROC('USP_MBS0200_R01', {'p_WORK_TYPE':'q','@p_IR_DATE_FR':'${controller.step1DayStartValue.value}','@p_IR_DATE_TO':'${controller.step1DayEndValue.value}','@p_URGENCY_FG':'${controller.urgencyReadCd.value}', '@p_INS_DEPT' : controller.selectedReadEngineTeamMap['CODE']
+                HomeApi.to.PROC('USP_MBS0200_R01', {'p_WORK_TYPE':'q','@p_IR_DATE_FR':'${controller.step1DayStartValue.value}','@p_IR_DATE_TO':'${controller.step1DayEndValue.value}','@p_URGENCY_FG':'${controller.urgencyReadCd.value}', '@p_INS_DEPT' : controller.selectedReadEngineTeamMap['CODE']
                   , '@p_RESULT_FG' : controller.pResultFg.value, '@p_IR_FG' : controller.selectedIrFqMap2['CODE']}).then((value) =>
                 {
                   Get.log('value[DATAS]: ${value['RESULT']['DATAS'][0]['DATAS']}'),
@@ -654,12 +654,12 @@ class FacilityPage extends StatelessWidget {
   Widget _listItem({required BuildContext context, required int index}) {
 
     return Obx(() => TextButton(
-        style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5)))),
-        padding:
-        MaterialStateProperty.all(const EdgeInsets.all(0))),
+      style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(5)))),
+          padding:
+          MaterialStateProperty.all(const EdgeInsets.all(0))),
       onPressed: () {
         if(controller.selectedDatas[index] == true) {
           controller.selectedDatas[index] = false;
@@ -781,34 +781,34 @@ class FacilityPage extends StatelessWidget {
 
               /// 설비 | 설비이상 - 가동조치중 | 전기팀 대충 그런거
               controller.datasList.isNotEmpty ?
-             Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 80,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(controller.datasList[index]['IR_TITLE'].toString(),
-                                style: AppTheme.a16400
-                                    .copyWith(color: AppTheme.a6c6c6c)),
-                            SizedBox(width: 4,),
-                            Text('|', style: AppTheme.a16400
-                                .copyWith(color: AppTheme.a6c6c6c)),
-                            SizedBox(width: 4,),
-                            Text(controller.datasList[index]['INS_DEPT'] == '20040' ? '전산팀' : controller.datasList[index]['INS_DEPT'] == '30020' ? '생산팀' : controller.datasList[index]['INS_DEPT'] == '30030' ? '공무팀' :
-                            controller.datasList[index]['INS_DEPT'] == '30040' ? '전기팀' : controller.datasList[index]['INS_DEPT'] == '30050' ? '안전환경팀' : controller.datasList[index]['INS_DEPT'] == '30060' ? '품질팀' :
-                            controller.datasList[index]['INS_DEPT'] == '99990' ? '기타' : '',
-                                style: AppTheme.a16400
-                                    .copyWith(color: AppTheme.a6c6c6c)),
-                          ],
-                        ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 80,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(controller.datasList[index]['IR_TITLE'].toString(),
+                              style: AppTheme.a16400
+                                  .copyWith(color: AppTheme.a6c6c6c)),
+                          SizedBox(width: 4,),
+                          Text('|', style: AppTheme.a16400
+                              .copyWith(color: AppTheme.a6c6c6c)),
+                          SizedBox(width: 4,),
+                          Text(controller.datasList[index]['INS_DEPT'] == '20040' ? '전산팀' : controller.datasList[index]['INS_DEPT'] == '30020' ? '생산팀' : controller.datasList[index]['INS_DEPT'] == '30030' ? '공무팀' :
+                          controller.datasList[index]['INS_DEPT'] == '30040' ? '전기팀' : controller.datasList[index]['INS_DEPT'] == '30050' ? '안전환경팀' : controller.datasList[index]['INS_DEPT'] == '30060' ? '품질팀' :
+                          controller.datasList[index]['INS_DEPT'] == '99990' ? '기타' : '',
+                              style: AppTheme.a16400
+                                  .copyWith(color: AppTheme.a6c6c6c)),
+                        ],
                       ),
                     ),
-                  ],
-                ) : Container(),
+                  ),
+                ],
+              ) : Container(),
 
               const SizedBox(height: 12,),
               controller.datasList.isNotEmpty ? Row(

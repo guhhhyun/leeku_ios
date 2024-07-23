@@ -372,7 +372,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     }).toList(),
                     onChanged: (value) {
                       controller.modifySelectedReadUrgency.value = value!;
-                     // value == '긴급' ?  controller.modifyIrCode.value = 'U' :  controller.modifyIrCode.value = 'N';
+                      // value == '긴급' ?  controller.modifyIrCode.value = 'U' :  controller.modifyIrCode.value = 'N';
 
                       Get.log('$value 선택!!!!');
                       // Get.log('${HomeApi.to.BIZ_DATA('L_USER_001')}');
@@ -525,8 +525,8 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     onChanged: (value) {
                       controller.modifyIrfgList.map((e) {
                         if(e['TEXT'] == value) {
-                            controller.modifySelectedIrFqMap['TEXT'] = e['TEXT'];
-                            controller.modifySelectedIrFqMap['CODE'] = e['CODE'];
+                          controller.modifySelectedIrFqMap['TEXT'] = e['TEXT'];
+                          controller.modifySelectedIrFqMap['CODE'] = e['CODE'];
                         }
 
                         //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
@@ -581,8 +581,8 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     onChanged: (value) {
                       controller.modifyEngineTeamList.map((e) {
                         if(e['TEXT'] == value) {
-                            controller.modifyEngineTeamCdMap['TEXT'] = e['TEXT'];
-                            controller.modifyEngineTeamCdMap['CODE'] = e['CODE'];
+                          controller.modifyEngineTeamCdMap['TEXT'] = e['TEXT'];
+                          controller.modifyEngineTeamCdMap['CODE'] = e['CODE'];
                         }
 
                         //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
@@ -724,7 +724,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
           var image = MemoryImage(list);
           controller.imageList.isNotEmpty ? controller.imageList[0] = image :
           controller.imageList.add(image);
-        //  controller.reqNewFileDownloadData(controller.resultFile1!.path);
+          //  controller.reqNewFileDownloadData(controller.resultFile1!.path);
         } else if (controller.resultFile2 == null) {
           controller.resultFile2 = await ImagePicker().pickImage(source: ImageSource.gallery);
           var unit = controller.resultFile2?.readAsBytes();
@@ -732,7 +732,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
           var image = MemoryImage(list);
           controller.imageList.length > 1 ? controller.imageList[1] = image :
           controller.imageList.add(image);
-        //  controller.reqNewFileDownloadData(controller.resultFile2!.path);
+          //  controller.reqNewFileDownloadData(controller.resultFile2!.path);
         }else if (controller.resultFile3 == null) {
           controller.resultFile3 = await ImagePicker().pickImage(source: ImageSource.gallery);
           var unit = controller.resultFile3?.readAsBytes();
@@ -740,7 +740,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
           var image = MemoryImage(list);
           controller.imageList.length > 2 ? controller.imageList[2] = image :
           controller.imageList.add(image);
-         // controller.reqNewFileDownloadData(controller.resultFile3!.path);
+          // controller.reqNewFileDownloadData(controller.resultFile3!.path);
         }else if (controller.resultFile4 == null) {
           controller.resultFile4 = await ImagePicker().pickImage(source: ImageSource.gallery);
           var unit = controller.resultFile4?.readAsBytes();
@@ -748,7 +748,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
           var image = MemoryImage(list);
           controller.imageList.length > 3 ? controller.imageList[3] = image :
           controller.imageList.add(image);
-        //  controller.reqNewFileDownloadData(controller.resultFile4!.path);
+          //  controller.reqNewFileDownloadData(controller.resultFile4!.path);
         }
 
         setState(() {});
@@ -906,17 +906,17 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
               onPressed: () {
                 setState(() {
                   if (firstSecondFlag == 1) {
-                      if(controller.fileSeqList.isNotEmpty) {
-                        for(var i = 0; i < controller.fileList.length; i++ ) {
-                          controller.fileList[i]['SEQ'] == controller.fileSeqList[0] ?
-                          controller.fileDelList.add(controller.fileList[i]) : null;
-                        }
+                    if(controller.fileSeqList.isNotEmpty) {
+                      for(var i = 0; i < controller.fileList.length; i++ ) {
+                        controller.fileList[i]['SEQ'] == controller.fileSeqList[0] ?
+                        controller.fileDelList.add(controller.fileList[i]) : null;
                       }
-                      Get.log('fileList0 ::: ${controller.fileList}');
-                      controller.resultFile1 = null;
-                      if(controller.resultFile1 == null && controller.resultFile2 == null && controller.resultFile3 == null && controller.resultFile4 == null) {
-                        controller.imageList.clear();
-                      }
+                    }
+                    Get.log('fileList0 ::: ${controller.fileList}');
+                    controller.resultFile1 = null;
+                    if(controller.resultFile1 == null && controller.resultFile2 == null && controller.resultFile3 == null && controller.resultFile4 == null) {
+                      controller.imageList.clear();
+                    }
                     //  controller.imageList.removeAt(0);
                   } else if(firstSecondFlag == 2){
                     if(controller.fileSeqList.length > 1) {
@@ -930,7 +930,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     if(controller.resultFile1 == null && controller.resultFile2 == null && controller.resultFile3 == null && controller.resultFile4 == null) {
                       controller.imageList.clear();
                     }
-                 //   controller.imageList.removeAt(1);
+                    //   controller.imageList.removeAt(1);
                   }else if(firstSecondFlag == 3){
                     if(controller.fileSeqList.length > 2) {
                       for(var i = 0; i < controller.fileList.length; i++ ) {
@@ -943,7 +943,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     if(controller.resultFile1 == null && controller.resultFile2 == null && controller.resultFile3 == null && controller.resultFile4 == null) {
                       controller.imageList.clear();
                     }
-                 //   controller.imageList.removeAt(2);
+                    //   controller.imageList.removeAt(2);
                   }else {
                     if(controller.fileSeqList.length > 3) {
                       for(var i = 0; i < controller.fileList.length; i++ ) {
@@ -957,7 +957,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                     if(controller.resultFile1 == null && controller.resultFile2 == null && controller.resultFile3 == null && controller.resultFile4 == null) {
                       controller.imageList.clear();
                     }
-                 //   controller.imageList.removeAt(3);
+                    //   controller.imageList.removeAt(3);
                   }
                 });
               },
@@ -1015,7 +1015,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
             controller.resultFile1 == null
                 ? const SizedBox()
                 : controller.resultFile1!.path == null ? Container() : controller.imageList.isNotEmpty ? _imageContainer(
-             index: 0
+                index: 0
             ) : Container(),
             const SizedBox(
               width: 20,
@@ -1052,15 +1052,15 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
     required int index,
   }) {
     return controller.imageList.isNotEmpty ?
-        InkWell(
-          onTap: () {
-            _imageShowDialog(context, index);
-          },
-          child: Container(
-              height: 70,
-              width: 50,
-              child: Image(image: controller.imageList[index]!, fit: BoxFit.fill)),
-        ) : Container();
+    InkWell(
+      onTap: () {
+        _imageShowDialog(context, index);
+      },
+      child: Container(
+          height: 70,
+          width: 50,
+          child: Image(image: controller.imageList[index]!, fit: BoxFit.fill)),
+    ) : Container();
   }
 
   void _imageShowDialog(BuildContext context, int index) {
@@ -1076,8 +1076,8 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height - 150,
+                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height - 150,
                       child: Image(image: controller.imageList[index]!))
                 ],
               ),
@@ -1270,7 +1270,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstModifyPage> {
         String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
         Get.log('fileNm:: ${fileNm}');
         Uint8List? bytes = await controller.resultFile4?.readAsBytes();
- /*       if (maxFileSize < bytes!.length) {
+        /*       if (maxFileSize < bytes!.length) {
           Utils.showToast(msg: '10M 이하의 파일만 업로드 가능합니다.');
           return;
         }*/

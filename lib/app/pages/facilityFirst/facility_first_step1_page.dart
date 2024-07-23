@@ -53,26 +53,26 @@ class FacilityFirstStep1Page extends StatelessWidget {
 
   Widget _bodyArea(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Container(
-          color: AppTheme.white,
-          padding: EdgeInsets.only(left: 18, right: 18, top: 4),
-          child: Column(
-            children: [
-              Obx(() => _calendar2(context),),
-              SizedBox(height: 12,),
-              _urgenTeamItem(),
-              SizedBox(height: 12,),
-              Row(
-                children: [
-                  _dropDownItem(),
-                  SizedBox(width: 16,),
-                  _irFqDropDownItem()
-                ],
-              ),
-              SizedBox(height: 36,),
-            ],
-          ),
+      child: Container(
+        color: AppTheme.white,
+        padding: EdgeInsets.only(left: 18, right: 18, top: 4),
+        child: Column(
+          children: [
+            Obx(() => _calendar2(context),),
+            SizedBox(height: 12,),
+            _urgenTeamItem(),
+            SizedBox(height: 12,),
+            Row(
+              children: [
+                _dropDownItem(),
+                SizedBox(width: 16,),
+                _irFqDropDownItem()
+              ],
+            ),
+            SizedBox(height: 36,),
+          ],
         ),
+      ),
     );
   }
 
@@ -566,7 +566,7 @@ class FacilityFirstStep1Page extends StatelessWidget {
 
                 //  Get.log('${ controller.selectedLocationMap} 선택!!!!');
               }).toList();
-            //  controller.selectedCheckIrFg.value = value!;
+              //  controller.selectedCheckIrFg.value = value!;
               controller.datasList.clear();
               HomeApi.to.PROC('USP_MBS0200_R01', {'p_WORK_TYPE':'q','@p_IR_DATE_FR':'${controller.dayStartValue.value}','@p_IR_DATE_TO':'${controller.dayEndValue.value}','@p_URGENCY_FG':'${controller.urgencyReadCd.value}', '@p_INS_DEPT' : controller.selectedReadEngineTeamMap['CODE']
                 , '@p_RESULT_FG' : controller.pResultFg.value, '@p_IR_FG':  controller.checkSelectedIrFqMap['CODE']}).then((value) =>
@@ -647,275 +647,275 @@ class FacilityFirstStep1Page extends StatelessWidget {
 
   Widget _listItem({required BuildContext context, required int index}) {
     return  TextButton(
-      style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(5)))),
-          /*backgroundColor: MaterialStateProperty.all<Color>(
+        style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5)))),
+            /*backgroundColor: MaterialStateProperty.all<Color>(
                 AppTheme.light_primary,
               ),*/
-          padding:
-          MaterialStateProperty.all(const EdgeInsets.all(0))),
-      onPressed: () async{
-        if(controller.isSelect[index] == true) {
-          controller.isSelect[index] = false;
-          controller.registButton.value = false;
-          controller.selectedContainer.clear();
-        }else {
-          try{
-            controller.isLoading.value = true;
-            for(var i = 0; i < controller.isSelect.length; i++) {
-              controller.isSelect[i] = false;
-            }
+            padding:
+            MaterialStateProperty.all(const EdgeInsets.all(0))),
+        onPressed: () async{
+          if(controller.isSelect[index] == true) {
+            controller.isSelect[index] = false;
+            controller.registButton.value = false;
             controller.selectedContainer.clear();
-            controller.isSelect[index] = true;
-            if(controller.isSelect[index] == true) {
-              controller.registButton.value = true;
-              controller.selectedContainer.add(controller.datasList[index]);
+          }else {
+            try{
+              controller.isLoading.value = true;
+              for(var i = 0; i < controller.isSelect.length; i++) {
+                controller.isSelect[i] = false;
+              }
+              controller.selectedContainer.clear();
+              controller.isSelect[index] = true;
+              if(controller.isSelect[index] == true) {
+                controller.registButton.value = true;
+                controller.selectedContainer.add(controller.datasList[index]);
+              }
+              controller.modifyCheck();
+              modifyEngineTeam();
+              controller.modifyErrorTime.value = controller.selectedContainer[0]['IR_DATE'];
+              var indexLast = controller.modifyErrorTime.value.lastIndexOf(':');
+              controller.modifyErrorTime.value = controller.modifyErrorTime.value.replaceFirst('T', ' ').replaceRange(indexLast, controller.modifyErrorTime.value.length, '');
+              controller.selectedContainer[0]['INS_FG'] == 'M' ? controller.modifySelectedIns.value = '설비점검' : controller.modifySelectedIns.value = '안전점검';
+              controller.selectedContainer[0]['URGENCY_FG'] == 'N' ? controller.modifySelectedReadUrgency.value = '보통' : controller.modifySelectedReadUrgency.value = '긴급';
+              controller.modifySelectedMachMap['MACH_CODE'] = controller.selectedContainer[0]['MACH_CODE'];
+              controller.selectedContainer[0]['MACH_CODE'] == '' ? controller.modifySelectedMachMap['MACH_NAME'] = '전체' : controller.modifySelectedMachMap['MACH_NAME'] = modifyMach();
+              controller.modifyTextTitleController.text = controller.selectedContainer[0]['IR_TITLE'];
+              await controller.reqFileData();
+              await controller.reqFileDownloadData();
+            }catch(err) {
+              Get.log(err.toString());
+            }finally {
+              controller.isLoading.value = false;
             }
-            controller.modifyCheck();
-            modifyEngineTeam();
-            controller.modifyErrorTime.value = controller.selectedContainer[0]['IR_DATE'];
-            var indexLast = controller.modifyErrorTime.value.lastIndexOf(':');
-            controller.modifyErrorTime.value = controller.modifyErrorTime.value.replaceFirst('T', ' ').replaceRange(indexLast, controller.modifyErrorTime.value.length, '');
-            controller.selectedContainer[0]['INS_FG'] == 'M' ? controller.modifySelectedIns.value = '설비점검' : controller.modifySelectedIns.value = '안전점검';
-            controller.selectedContainer[0]['URGENCY_FG'] == 'N' ? controller.modifySelectedReadUrgency.value = '보통' : controller.modifySelectedReadUrgency.value = '긴급';
-            controller.modifySelectedMachMap['MACH_CODE'] = controller.selectedContainer[0]['MACH_CODE'];
-            controller.selectedContainer[0]['MACH_CODE'] == '' ? controller.modifySelectedMachMap['MACH_NAME'] = '전체' : controller.modifySelectedMachMap['MACH_NAME'] = modifyMach();
-            controller.modifyTextTitleController.text = controller.selectedContainer[0]['IR_TITLE'];
-            await controller.reqFileData();
-            await controller.reqFileDownloadData();
-          }catch(err) {
-            Get.log(err.toString());
-          }finally {
-            controller.isLoading.value = false;
+
+
+
+            Get.to(const FacilityFirstModifyPage());
           }
+        },
+        child: Obx(() => Container(
+          margin: const EdgeInsets.only(left: 18, right: 18, bottom: 18),
+          padding: const EdgeInsets.only(top: 18, bottom: 18, left: 18, right: 18),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: controller.isSelect[index] ? Border.all(color: AppTheme.black, width: 3) : Border.all(color: AppTheme.ae2e2e2),
+              color: AppTheme.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.gray_c_gray_100.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ]
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  controller.datasList.isNotEmpty ?
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: controller.datasList[index]['URGENCY_FG'].toString() != 'N' ? AppTheme.afef1ef :
+                            AppTheme.aecf9f2
+                        ),
+                        child: Text(controller.datasList[index]['URGENCY_FG'].toString() == 'N' ? '보통' : '긴급', /// 긴급 or 보통 으로
+                            style: AppTheme.a12500
+                                .copyWith(color: controller.datasList[index]['URGENCY_FG'].toString() != 'N' ? AppTheme.af34f39 : AppTheme.a18b858)),
+                      ),
+                      const SizedBox(width: 4,),
+                      Container(
+                        padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:  AppTheme.af4f4f4
+                        ),
 
+                        child: Text(controller.datasList[index]['INS_FG'].toString() == 'M' ? '설비점검' : '안전점검',
+                            style: AppTheme.a12500
+                                .copyWith(color: AppTheme.a969696)),
+                      ),
+                      const SizedBox(width: 4,),
+                      controller.datasList[index]['RESULT_FG'].toString() == '' ? Container() :
+                      Container(
+                        padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:  controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? Color(0xffF0FFFF) : Color(0xffFFFFE0)
+                        ),
 
+                        child: Text(controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? '정비완료'
+                            : controller.datasList[index]['RESULT_FG'].toString() == 'I' ? '정비 진행중' :
+                        controller.datasList[index]['RESULT_FG'].toString() == 'N' ? '미조치' : '',
+                            style: AppTheme.a12500
+                                .copyWith(color: controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? Color(0xff1E90FF) : Colors.orangeAccent)),
+                      ),
 
-          Get.to(const FacilityFirstModifyPage());
-        }
-      },
-      child: Obx(() => Container(
-        margin: const EdgeInsets.only(left: 18, right: 18, bottom: 18),
-        padding: const EdgeInsets.only(top: 18, bottom: 18, left: 18, right: 18),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: controller.isSelect[index] ? Border.all(color: AppTheme.black, width: 3) : Border.all(color: AppTheme.ae2e2e2),
-            color: AppTheme.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppTheme.gray_c_gray_100.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
+                      controller.datasList[index]['IR_FG'].toString() == '' ? Container() :
+                      Container(
+                        margin: controller.datasList[index]['RESULT_FG'].toString() != '' ?const EdgeInsets.only(left: 4) : null,
+                        padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:  AppTheme.af4f4f4
+                        ),
+
+                        child: Text( controller.datasList[index]['IR_FG'].toString() == '010' ? '돌발정비'
+                            : controller.datasList[index]['IR_FG'].toString() == '020' ? '예방정비' : controller.datasList[index]['IR_FG'].toString() == '030' ? '개조/개선' :
+                        controller.datasList[index]['IR_FG'].toString() == '040' ? '공사성(신설)' :
+                        controller.datasList[index]['IR_FG'].toString() == '060' ? '안전/환경' : '기타',
+                            style: AppTheme.a12500
+                                .copyWith(color: AppTheme.a969696)),
+                      )
+                    ],
+                  )
+                      : Container(),
+                  controller.datasList.isNotEmpty ?
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(controller.datasList[index]['INS_FG'].toString() == 'S' ? '' : controller.datasList[index]['MACH_CODE'].toString() == '' ? '설비 외' : _test(index),
+                          style: AppTheme.a16700
+                              .copyWith(color: AppTheme.black)),
+                    ],
+                  )
+                      : Container(),
+                ],
               ),
-            ]
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                controller.datasList.isNotEmpty ?
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: controller.datasList[index]['URGENCY_FG'].toString() != 'N' ? AppTheme.afef1ef :
-                          AppTheme.aecf9f2
-                      ),
-                      child: Text(controller.datasList[index]['URGENCY_FG'].toString() == 'N' ? '보통' : '긴급', /// 긴급 or 보통 으로
-                          style: AppTheme.a12500
-                              .copyWith(color: controller.datasList[index]['URGENCY_FG'].toString() != 'N' ? AppTheme.af34f39 : AppTheme.a18b858)),
-                    ),
-                    const SizedBox(width: 4,),
-                    Container(
-                      padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color:  AppTheme.af4f4f4
-                      ),
+              const SizedBox(height: 8,),
 
-                      child: Text(controller.datasList[index]['INS_FG'].toString() == 'M' ? '설비점검' : '안전점검',
-                          style: AppTheme.a12500
-                              .copyWith(color: AppTheme.a969696)),
-                    ),
-                    const SizedBox(width: 4,),
-                    controller.datasList[index]['RESULT_FG'].toString() == '' ? Container() :
-                    Container(
-                      padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color:  controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? Color(0xffF0FFFF) : Color(0xffFFFFE0)
-                      ),
-
-                      child: Text(controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? '정비완료'
-                          : controller.datasList[index]['RESULT_FG'].toString() == 'I' ? '정비 진행중' :
-                      controller.datasList[index]['RESULT_FG'].toString() == 'N' ? '미조치' : '',
-                          style: AppTheme.a12500
-                              .copyWith(color: controller.datasList[index]['RESULT_FG'].toString() == 'Y' ? Color(0xff1E90FF) : Colors.orangeAccent)),
-                    ),
-
-                    controller.datasList[index]['IR_FG'].toString() == '' ? Container() :
-                    Container(
-                      margin: controller.datasList[index]['RESULT_FG'].toString() != '' ?const EdgeInsets.only(left: 4) : null,
-                      padding: const EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 2),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color:  AppTheme.af4f4f4
-                      ),
-
-                      child: Text( controller.datasList[index]['IR_FG'].toString() == '010' ? '돌발정비'
-                          : controller.datasList[index]['IR_FG'].toString() == '020' ? '예방정비' : controller.datasList[index]['IR_FG'].toString() == '030' ? '개조/개선' :
-                      controller.datasList[index]['IR_FG'].toString() == '040' ? '공사성(신설)' :
-                      controller.datasList[index]['IR_FG'].toString() == '060' ? '안전/환경' : '기타',
-                          style: AppTheme.a12500
-                              .copyWith(color: AppTheme.a969696)),
-                    )
-                  ],
-                )
-                    : Container(),
-                controller.datasList.isNotEmpty ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(controller.datasList[index]['INS_FG'].toString() == 'S' ? '' : controller.datasList[index]['MACH_CODE'].toString() == '' ? '설비 외' : _test(index),
-                        style: AppTheme.a16700
-                            .copyWith(color: AppTheme.black)),
-                  ],
-                )
-                    : Container(),
-              ],
-            ),
-            const SizedBox(height: 8,),
-
-            /// 설비 | 설비이상 - 가동조치중 | 전기팀 대충 그런거
-            controller.datasList.isNotEmpty ?
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width - 80,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(controller.datasList[index]['IR_TITLE'].toString(),
+              /// 설비 | 설비이상 - 가동조치중 | 전기팀 대충 그런거
+              controller.datasList.isNotEmpty ?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 80,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Text(controller.datasList[index]['IR_TITLE'].toString(),
                                 style: AppTheme.a16400
                                     .copyWith(color: AppTheme.a6c6c6c), overflow: TextOverflow.ellipsis),
-                        ),
-                        const SizedBox(width: 4,),
-                        Text('|', style: AppTheme.a16400
-                            .copyWith(color: AppTheme.a6c6c6c)),
-                        const SizedBox(width: 4,),
-                        Container(
-                          child: Text(controller.datasList[index]['INS_DEPT'] == '20040' ? '전산팀' : controller.datasList[index]['INS_DEPT'] == '30020' ? '생산팀' : controller.datasList[index]['INS_DEPT'] == '30030' ? '공무팀' :
-                          controller.datasList[index]['INS_DEPT'] == '30040' ? '전기팀' : controller.datasList[index]['INS_DEPT'] == '30050' ? '안전환경팀' : controller.datasList[index]['INS_DEPT'] == '30060' ? '품질팀' :
-                              controller.datasList[index]['INS_DEPT'] == '99990' ? '기타' : '',
-                              style: AppTheme.a16400
-                                  .copyWith(color: AppTheme.a6c6c6c), overflow: TextOverflow.ellipsis),
-                        ),
-                      ],
+                          ),
+                          const SizedBox(width: 4,),
+                          Text('|', style: AppTheme.a16400
+                              .copyWith(color: AppTheme.a6c6c6c)),
+                          const SizedBox(width: 4,),
+                          Container(
+                            child: Text(controller.datasList[index]['INS_DEPT'] == '20040' ? '전산팀' : controller.datasList[index]['INS_DEPT'] == '30020' ? '생산팀' : controller.datasList[index]['INS_DEPT'] == '30030' ? '공무팀' :
+                            controller.datasList[index]['INS_DEPT'] == '30040' ? '전기팀' : controller.datasList[index]['INS_DEPT'] == '30050' ? '안전환경팀' : controller.datasList[index]['INS_DEPT'] == '30060' ? '품질팀' :
+                            controller.datasList[index]['INS_DEPT'] == '99990' ? '기타' : '',
+                                style: AppTheme.a16400
+                                    .copyWith(color: AppTheme.a6c6c6c), overflow: TextOverflow.ellipsis),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ) : Container(),
-            const SizedBox(height: 12,),
-            controller.datasList.isNotEmpty ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text('의뢰: ',
-                        style: AppTheme.a14700
-                            .copyWith(color: AppTheme.a959595)),
-                    Text(controller.datasList[index]['IR_USER'].toString(),
-                        style: AppTheme.a14400
-                            .copyWith(color: AppTheme.a959595)),
-                    const SizedBox(width: 12,),
-                    Container(
-                        child: (() {
-                          var firstIndex = controller.datasList[index]['IR_DATE']
-                              .toString().lastIndexOf(':');
-                          var lastIndex = controller.datasList[index]['IR_DATE']
-                              .toString().length;
-                          return Text(
-                              controller.datasList[index]['IR_DATE']
-                                  .toString().replaceAll('T', ' ').replaceRange(firstIndex, lastIndex, ''),
-                              style: AppTheme.a14400
-                                  .copyWith(color: AppTheme.a959595));
-                        })()
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Icon(Icons.watch_later_outlined, color: AppTheme.gray_c_gray_200, size: 20,),
-                    const SizedBox(width: 4,),
-                    Text(controller.datasList[index]['RESULT_FG'] == 'Y' ?
-                        '${controller.datasList[index]['AFTER_TIME'].toString()}h 경과' : '${_dateDifference(index)}h 경과',
-                        style: AppTheme.a14700
-                            .copyWith(color: AppTheme.a969696)),
-                  ],
-                )
-              ],
-            ) : Container(),
-            controller.datasList.isNotEmpty ?
-            controller.datasList[index]['CHK_USER'] != null ?
-            Row(
-              children: [
-                SizedBox(height: 4,),
-                Text('확인: ',
-                    style: AppTheme.a14700
-                        .copyWith(color: AppTheme.a959595)),
-                Text(controller.datasList[index]['CHK_USER'].toString(),
-                    style: AppTheme.a14400
-                        .copyWith(color: AppTheme.a959595)),
-                const SizedBox(width: 12,),
-                Container(
-                    child: (() {
-                      return Text(
-                          controller.datasList[index]['CHK_DTM']
-                              .toString(),
+                ],
+              ) : Container(),
+              const SizedBox(height: 12,),
+              controller.datasList.isNotEmpty ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text('의뢰: ',
+                          style: AppTheme.a14700
+                              .copyWith(color: AppTheme.a959595)),
+                      Text(controller.datasList[index]['IR_USER'].toString(),
                           style: AppTheme.a14400
-                              .copyWith(color: AppTheme.a959595));
-                    })()
-                ),
-              ],
-            ) : Container() : Container(),
-            controller.datasList.isNotEmpty ?
-            controller.datasList[index]['RE_USER'] != null ?
-            Row(
-              children: [
-                SizedBox(height: 4,),
-                Text('조치: ',
-                    style: AppTheme.a14700
-                        .copyWith(color: AppTheme.a959595)),
-                Text(controller.datasList[index]['RE_USER'].toString(),
-                    style: AppTheme.a14400
-                        .copyWith(color: AppTheme.a959595)),
-                const SizedBox(width: 12,),
-                Container(
-                    child: (() {
-                      return Text(
-                          controller.datasList[index]['RE_CRT_DATE']
-                              .toString(),
-                          style: AppTheme.a14400
-                              .copyWith(color: AppTheme.a959595));
-                    })()
-                ),
-              ],
-            ) : Container() : Container()
-          ],
-        ),
-      ),)
-     );
+                              .copyWith(color: AppTheme.a959595)),
+                      const SizedBox(width: 12,),
+                      Container(
+                          child: (() {
+                            var firstIndex = controller.datasList[index]['IR_DATE']
+                                .toString().lastIndexOf(':');
+                            var lastIndex = controller.datasList[index]['IR_DATE']
+                                .toString().length;
+                            return Text(
+                                controller.datasList[index]['IR_DATE']
+                                    .toString().replaceAll('T', ' ').replaceRange(firstIndex, lastIndex, ''),
+                                style: AppTheme.a14400
+                                    .copyWith(color: AppTheme.a959595));
+                          })()
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.watch_later_outlined, color: AppTheme.gray_c_gray_200, size: 20,),
+                      const SizedBox(width: 4,),
+                      Text(controller.datasList[index]['RESULT_FG'] == 'Y' ?
+                      '${controller.datasList[index]['AFTER_TIME'].toString()}h 경과' : '${_dateDifference(index)}h 경과',
+                          style: AppTheme.a14700
+                              .copyWith(color: AppTheme.a969696)),
+                    ],
+                  )
+                ],
+              ) : Container(),
+              controller.datasList.isNotEmpty ?
+              controller.datasList[index]['CHK_USER'] != null ?
+              Row(
+                children: [
+                  SizedBox(height: 4,),
+                  Text('확인: ',
+                      style: AppTheme.a14700
+                          .copyWith(color: AppTheme.a959595)),
+                  Text(controller.datasList[index]['CHK_USER'].toString(),
+                      style: AppTheme.a14400
+                          .copyWith(color: AppTheme.a959595)),
+                  const SizedBox(width: 12,),
+                  Container(
+                      child: (() {
+                        return Text(
+                            controller.datasList[index]['CHK_DTM']
+                                .toString(),
+                            style: AppTheme.a14400
+                                .copyWith(color: AppTheme.a959595));
+                      })()
+                  ),
+                ],
+              ) : Container() : Container(),
+              controller.datasList.isNotEmpty ?
+              controller.datasList[index]['RE_USER'] != null ?
+              Row(
+                children: [
+                  SizedBox(height: 4,),
+                  Text('조치: ',
+                      style: AppTheme.a14700
+                          .copyWith(color: AppTheme.a959595)),
+                  Text(controller.datasList[index]['RE_USER'].toString(),
+                      style: AppTheme.a14400
+                          .copyWith(color: AppTheme.a959595)),
+                  const SizedBox(width: 12,),
+                  Container(
+                      child: (() {
+                        return Text(
+                            controller.datasList[index]['RE_CRT_DATE']
+                                .toString(),
+                            style: AppTheme.a14400
+                                .copyWith(color: AppTheme.a959595));
+                      })()
+                  ),
+                ],
+              ) : Container() : Container()
+            ],
+          ),
+        ),)
+    );
   }
   Widget _bottomButton(BuildContext context) {
     return BottomAppBar(
@@ -973,11 +973,11 @@ class FacilityFirstStep1Page extends StatelessWidget {
   }
 
   String _test(int index) {
-      for(var u = 0; u < controller.machList.length; u++) {
-        if(controller.machList[u]['MACH_CODE'].toString() == controller.datasList[index]['MACH_CODE'].toString()) {
-         return controller.machList[u]['MACH_NAME'];
-        }
+    for(var u = 0; u < controller.machList.length; u++) {
+      if(controller.machList[u]['MACH_CODE'].toString() == controller.datasList[index]['MACH_CODE'].toString()) {
+        return controller.machList[u]['MACH_NAME'];
       }
+    }
 
     return '';
   }

@@ -66,7 +66,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
   }
 
   Future<bool> _onBackKey() async{
-     await showDialog(
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -132,9 +132,9 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                border: Border(
-                                  right: BorderSide(color: const Color(0x5c3c3c43),)
-                                )
+                                  border: Border(
+                                      right: BorderSide(color: const Color(0x5c3c3c43),)
+                                  )
                               ),
                               width: MediaQuery.of(context).size.width,
                               padding: const EdgeInsets.only(
@@ -187,54 +187,54 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
                 )
               ]);
         });
-     return false;
+    return false;
   }
 
   Widget _bodyArea(BuildContext context) {
     controller.errorTime.value = DateFormat('yyyy.MM.dd HH:mm').format(DateTime.now());
     return SliverToBoxAdapter(
-        child: Container(
-          color: AppTheme.white,
-          padding: EdgeInsets.only(left: 18, right: 18, top: 4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             // _basicContainerItem(context, '의뢰번호', '자동생성', 1),
-              _basicContainerItem(context, '장애일시', '${controller.errorTime.value}', 2),
-              Obx(() =>  controller.isErrorDateChoice.value == true ?
-              Column(
-                children: [
-                  SizedBox(height: 16,),
-                  _errorDateSelect(),
-                ],
-              ) : Container(),),
-              SizedBox(height: 20,),
-              _inspectionGubunItem(context),
-              controller.selectedIns.value == '안전점검' ? Container() :
-              Column(
-                children: [
-                  SizedBox(height: 20,),
-                  _facilityChoiceItem(context),
-                ],
-              ),
-              SizedBox(height: 20,),
-              Obx(() => controller.selectedMachMap['MACH_NAME'] == '전체' ? _anotherFacilityItem() : Container(),),
-              SizedBox(height: 20,),
-              _engineTeamItem(context),
-              SizedBox(height: 20,),
-              _titleTextFieldItem(),
-              SizedBox(height: 20,),
-              _contentTextFieldItem(),
-              SizedBox(height: 20,),
-              _fileArea(),
-              SizedBox(height: 20,),
-              _imageArea()
-              // _topDataItem(),
-              //_inputArea(context),
-              // _partChoiceBody()
-            ],
-          ),
+      child: Container(
+        color: AppTheme.white,
+        padding: EdgeInsets.only(left: 18, right: 18, top: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // _basicContainerItem(context, '의뢰번호', '자동생성', 1),
+            _basicContainerItem(context, '장애일시', '${controller.errorTime.value}', 2),
+            Obx(() =>  controller.isErrorDateChoice.value == true ?
+            Column(
+              children: [
+                SizedBox(height: 16,),
+                _errorDateSelect(),
+              ],
+            ) : Container(),),
+            SizedBox(height: 20,),
+            _inspectionGubunItem(context),
+            controller.selectedIns.value == '안전점검' ? Container() :
+            Column(
+              children: [
+                SizedBox(height: 20,),
+                _facilityChoiceItem(context),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Obx(() => controller.selectedMachMap['MACH_NAME'] == '전체' ? _anotherFacilityItem() : Container(),),
+            SizedBox(height: 20,),
+            _engineTeamItem(context),
+            SizedBox(height: 20,),
+            _titleTextFieldItem(),
+            SizedBox(height: 20,),
+            _contentTextFieldItem(),
+            SizedBox(height: 20,),
+            _fileArea(),
+            SizedBox(height: 20,),
+            _imageArea()
+            // _topDataItem(),
+            //_inputArea(context),
+            // _partChoiceBody()
+          ],
         ),
+      ),
     );
   }
   /*Widget _streamBuilder() {
@@ -264,7 +264,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(top: flag == 1 ? 14 : 0, bottom: flag == 1 ? 14 : 0),
           decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: AppTheme.gray_gray_200))
+              border: Border(bottom: BorderSide(color: AppTheme.gray_gray_200))
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -458,15 +458,15 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
         SizedBox(height: 4,),
         Container(
           decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: AppTheme.gray_gray_200),
-            )
+              border: Border(
+                bottom: BorderSide(color: AppTheme.gray_gray_200),
+              )
             // borderRadius: BorderRadius.circular(5)
           ),
           width: double.infinity,
           child: TextFormField(
             style:  AppTheme.a16400.copyWith(color: AppTheme.a6c6c6c),
-           // maxLines: 5,
+            // maxLines: 5,
             controller: controller.textFacilityController,
             textInputAction: TextInputAction.done,
             keyboardType: TextInputType.text,
@@ -593,7 +593,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
                           controller.selectedEngineTeamMap['CODE'] = e['CODE'];
                         }
 
-                          Get.log('${ controller.selectedEngineTeamMap['CODE']} 선택!!!!');
+                        Get.log('${ controller.selectedEngineTeamMap['CODE']} 선택!!!!');
                       }).toList();
 
                       Get.log('$value 선택!!!!');
@@ -753,7 +753,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
           var image = MemoryImage(list!);
           controller.newImageList.length > 3 ? controller.newImageList[3] = image :
           controller.newImageList.add(image);
-         /* resultFile4 = await FilePicker.platform.pickFiles(
+          /* resultFile4 = await FilePicker.platform.pickFiles(
             type: FileType.custom,
             allowedExtensions: ['jpg', 'pdf', 'png'],
           );
@@ -766,7 +766,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
         height: 99,
         width: 99,
         child: Center(
-          child: Icon(Icons.picture_in_picture_outlined)/*Image.asset(
+            child: Icon(Icons.picture_in_picture_outlined)/*Image.asset(
             'assets/app/icon_plus_24_2_px.png',
             width: 24,
             height: 24,
@@ -885,7 +885,7 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
             decoration:
             BoxDecoration(
                 border: Border.all(color: AppTheme.light_ui_03),
-              borderRadius: BorderRadius.circular(100)
+                borderRadius: BorderRadius.circular(100)
             ),
             height: 99,
             width: 99,
@@ -1104,32 +1104,32 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
         child: Row(
           children: [
             Expanded(
-              child: Container(
-                child: TextButton(
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        backgroundColor:
+                child: Container(
+                  child: TextButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          backgroundColor:
 
-                        MaterialStateProperty.all<Color>(AppTheme.aE2E2E2),
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                            const EdgeInsets.all(0))),
-                    onPressed: () async {
-                      _onBackKey();
-                    },
-                    child: Container(
-                      height: 56,
-                      // width: MediaQuery.of(context).size.width,
-                      child: Center(
-                          child: Text(
-                            '목록',
-                            style: AppTheme.bodyBody2.copyWith(
-                              color: AppTheme.a6c6c6c,
-                            ),
-                          )),
-                    )),
-              )
+                          MaterialStateProperty.all<Color>(AppTheme.aE2E2E2),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.all(0))),
+                      onPressed: () async {
+                        _onBackKey();
+                      },
+                      child: Container(
+                        height: 56,
+                        // width: MediaQuery.of(context).size.width,
+                        child: Center(
+                            child: Text(
+                              '목록',
+                              style: AppTheme.bodyBody2.copyWith(
+                                color: AppTheme.a6c6c6c,
+                              ),
+                            )),
+                      )),
+                )
             ),
             SizedBox(width: 12,),
             Expanded(
@@ -1160,13 +1160,13 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
                         await controller.saveButton();
                         _submmit(); /// 삭제 할 수 있음 ----!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         SchedulerBinding.instance!.addPostFrameCallback((_) {
-                           Get.dialog(_dialog());
+                          Get.dialog(_dialog());
                         });
-                       // controller.check();
+                        // controller.check();
                       } : null,
                       child: Container(
                         height: 56,
-                       // width: MediaQuery.of(context).size.width,
+                        // width: MediaQuery.of(context).size.width,
                         child: Center(
                             child: Text(
                               '저장',
@@ -1230,43 +1230,43 @@ class _FacilityFirstStep2PageState extends State<FacilityFirstStep2Page> {
     );
   }
 
-/// 파일 저장쿼리 넘기기
+  /// 파일 저장쿼리 넘기기
   void _submmit() async {
     try {
-        if (resultFile1 != null) {
-          String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
-          Uint8List? bytes = await resultFile1?.readAsBytes();
-          String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm.jpg', bytes!);
-          var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
-            '@p_FILE_NAME': resultFile1!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'0', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
-          Get.log('경로 테스트::: $path');
+      if (resultFile1 != null) {
+        String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
+        Uint8List? bytes = await resultFile1?.readAsBytes();
+        String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm.jpg', bytes!);
+        var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
+          '@p_FILE_NAME': resultFile1!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'0', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
+        Get.log('경로 테스트::: $path');
 
-        }
-        if (resultFile2 != null) {
-          String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
-          Uint8List? bytes = await resultFile2?.readAsBytes();
-          String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(2).jpg', bytes!);
-          var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
-            '@p_FILE_NAME': resultFile2!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'1', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
-          Get.log('경로 테스트::: $path');
-        }
-        if (resultFile3 != null) {
-          String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
-          Uint8List? bytes = await resultFile3?.readAsBytes();
-          String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(3).jpg', bytes!);
-          var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
-            '@p_FILE_NAME': resultFile3!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'2', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
-          Get.log('경로 테스트::: $path');
+      }
+      if (resultFile2 != null) {
+        String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
+        Uint8List? bytes = await resultFile2?.readAsBytes();
+        String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(2).jpg', bytes!);
+        var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
+          '@p_FILE_NAME': resultFile2!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'1', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
+        Get.log('경로 테스트::: $path');
+      }
+      if (resultFile3 != null) {
+        String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
+        Uint8List? bytes = await resultFile3?.readAsBytes();
+        String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(3).jpg', bytes!);
+        var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
+          '@p_FILE_NAME': resultFile3!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'2', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
+        Get.log('경로 테스트::: $path');
 
-        }
-        if (resultFile4 != null) {
-          String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
-          Uint8List? bytes = await resultFile4?.readAsBytes();
-          String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(4).jpg', bytes!);
-          var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
-            '@p_FILE_NAME': resultFile4!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'3', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
-          Get.log('경로 테스트::: $path');
-        }
+      }
+      if (resultFile4 != null) {
+        String fileNm = DateFormat('yyyy-MM-dd_HHmm').format(DateTime.now());
+        Uint8List? bytes = await resultFile4?.readAsBytes();
+        String path = await HomeApi.to.FILE_UPLOAD('MBS0200\\$fileNm(4).jpg', bytes!);
+        var retVal = await HomeApi.to.PROC('USP_MBS0200_S01', {'p_WORK_TYPE':'FILE_N', '@p_IR_CODE':controller.irFileCode.value,
+          '@p_FILE_NAME': resultFile4!.name, '@p_SVR_FILE_PATH': path, '@p_SEQ':'3', '@p_USER': Utils.getStorage.read('userId'), '@p_IR_TITLE': controller.textTitleController.text});
+        Get.log('경로 테스트::: $path');
+      }
 
 
     } catch (err) {

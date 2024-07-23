@@ -75,8 +75,9 @@ class FacilityFirstController extends GetxController {
 
 
   RxString dayValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
-  // RxString dayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 10))).obs;
-  RxString dayStartValue = '${DateTime.now().year.toString()}-01-01'.obs;
+  // RxString dayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 90))).obs;
+  // RxString dayStartValue = '${DateTime.now().year.toString()}-01-01'.obs;
+  RxString dayStartValue = DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 90))).obs;
   RxString dayEndValue = DateFormat('yyyy-MM-dd').format(DateTime.now()).obs;
   RxInt choiceButtonVal = 1.obs;
   RxBool isShowCalendar = false.obs;
@@ -412,7 +413,7 @@ class FacilityFirstController extends GetxController {
     datasList.clear();
     convert();
     HomeApi.to.PROC('USP_MBS0200_R01', {'p_WORK_TYPE':'q','@p_IR_DATE_FR':'${dayStartValue.value}','@p_IR_DATE_TO':'${dayEndValue.value}','@p_URGENCY_FG':'${urgencyReadCd.value}', '@p_INS_DEPT' : ''
-      , '@p_RESULT_FG' : pResultFg.value, '@p_IR_FG' : '010'}).then((value) =>
+      , '@p_RESULT_FG' : pResultFg.value, '@p_IR_FG' : ''}).then((value) =>
     {
       Get.log('value[DATAS]: ${value['RESULT']['DATAS'][0]['DATAS']}'),
       if(value['RESULT']['DATAS'][0]['DATAS'] != null) {
